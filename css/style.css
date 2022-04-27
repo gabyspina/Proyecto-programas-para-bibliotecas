@@ -1,0 +1,78 @@
+header {
+  background-image: url(https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823__480.jpg);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  color: #04044e; }
+
+h1 h2 {
+  display: flex;
+  align-items: center; }
+
+#espacios {
+  display: grid;
+  grid-template-columns: 1fr 1fr; }
+
+#biblioteca {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  background-image: url(https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+  color: #faf3f3; }
+
+#seccionPrestamos {
+  background-image: url(https://img.freepik.com/foto-gratis/textura-papel-fondo-papel-arrugado-blanco_5207-1452.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #04044e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bolder; }
+
+.seleccion {
+  padding: 20px; }
+
+div {
+  padding: 5px;
+  margin: 5px; }
+
+#carga_de_libros {
+  background-image: url(https://i.pinimg.com/originals/8a/54/6b/8a546bfecc01c605c6f1803b499ad98b.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #04044e;
+  font-weight: bolder; }
+
+#estado #opciones_estado {
+  display: flex;
+  flex-direction: row; }
+
+#libros_biblioteca {
+  background-color: rgba(255, 192, 203, 0.521);
+  border: solid black; }
+  #libros_biblioteca table {
+    border: solid white; }
+    #libros_biblioteca table td {
+      border: solid red; }
+
+#titulo_encabezado {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: black;
+  font-weight: bolder;
+  border: double white;
+  height: 50px; }
+  #titulo_encabezado li {
+    justify-content: center;
+    border: double white;
+    align-content: center; }
