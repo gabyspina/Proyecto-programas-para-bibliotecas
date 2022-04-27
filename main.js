@@ -4,7 +4,7 @@ class Libro{
         this.titulo_carga = titulo_carga;
         this.autor_carga = autor_carga;
         this.genero = genero;
-        
+   //     this.radios = radios;
     }
 }
 
@@ -76,7 +76,16 @@ function generar_libro() {
     let titulo_carga = document.getElementById("tiluloCarga").value;
     let autor_carga = document.getElementById("autorCarga").value;
     let genero = document.getElementById("generoCarga").value;
+//    let radios = document.getElementsByName("estados");
 
+//     let valorRadio = "  ";
+
+// for (let i  = 0; i < radios.length; i++) {
+//     if(radios[i].checked){
+//         valorRadio =  radios[i].value;
+//     }
+    
+// }
 
     let libro = new Libro(titulo_carga, autor_carga, genero);
 
@@ -90,32 +99,7 @@ function generar_libro() {
 
 
 
-function opciones() {
- 
-    let select = document.createElement("select");
- 
-    let option1 = document.createElement("option");
-    option1.setAttribute("value", "value1");
-    let option1Texto = document.createTextNode("Disponible");
-    option1.appendChild(option1Texto);
- 
-    let option2 = document.createElement("option");
-    option2.setAttribute("value", "value2");
-    let option2Texto = document.createTextNode("Prestado");
-    option2.appendChild(option2Texto);
- 
- 
-    select.appendChild(option1);
-    select.appendChild(option2);
-
- 
-     
-}
-
-
-let eleccion = opciones()
-
-function carga_tabla(titulo_carga, autor_carga, genero, eleccion) {
+function carga_tabla(titulo_carga, autor_carga, genero) {
 
 
     // Obtener la referencia del elemento body
@@ -125,9 +109,6 @@ function carga_tabla(titulo_carga, autor_carga, genero, eleccion) {
     // let tabla = document.createElement("table");
     let tblBody = document.createElement("tbody");
 
-    
-
-    
     // Crea las celdas
     for (let i = 0; i < 1; i++) {
 
@@ -146,7 +127,7 @@ function carga_tabla(titulo_carga, autor_carga, genero, eleccion) {
             let textoCelda = document.createTextNode(titulo_carga);
             let textoCelda2 = document.createTextNode(autor_carga);
             let textoCelda3 = document.createTextNode(genero);
-            let textoCelda4 = document.createTextNode(eleccion);
+            let textoCelda4 = document.createTextNode("Debería ir el estado");
 
             
 
@@ -190,6 +171,7 @@ function carga_en_biblioteca() {
             let libro = arreglo[i];
             console.log(libro.titulo_carga);
             console.log(libro.autor_carga);
+ //           console.log(libro.valorRadio)
            carga_tabla(libro.titulo_carga, libro.autor_carga, libro.genero);
 
         }
