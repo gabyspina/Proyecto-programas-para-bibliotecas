@@ -1,29 +1,20 @@
 
+
 class Libro{
     constructor(titulo_carga, autor_carga,genero){
         this.titulo_carga = titulo_carga;
         this.autor_carga = autor_carga;
         this.genero = genero;
-   //     this.radios = radios;
+        }
     }
-}
 
-function getLibroName() {
-    return this.titulo_carga;
-}
 
-function error () {Swal.fire({
-    title: 'Error!',
-    text: 'Ingresar titulo',
-    icon: 'error',
-    confirmButtonText: ' =( ',
-    timer: 2000
-    })}
 
 let libros_en_biblioteca = new Array();
 const clave_local_storage = "carga_de_libros";
 
 carga_en_biblioteca();
+
 
 let botonCarga = document.getElementById("btnCargar");
 
@@ -32,14 +23,19 @@ botonCarga.addEventListener("click", ()=>{
     if(validar_datos()){
 
         generar_libro();
+   
+
+
+
     }
     else{
-        error()
+        Swal.fire({
+            title: 'Debe ingresar todos los datos',
+            icon: 'error',
+            timer: 5000,}
+        );
     }
-
-}
-
-)
+})
 
 function validar_datos (){
     let input_titulo_carga = document.getElementById("tiluloCarga").value;
@@ -48,24 +44,41 @@ function validar_datos (){
 
     
     if(!input_titulo_carga){
-        alert("Debe ingresar nombre");
+
+       
+        Swal.fire({
+            title: 'Debe ingresar el titulo del libro',
+            icon: 'error',
+            timer: 5000,}
+        )
+        
+   
     
         return false;
     }
+
     
     if(!input_autor_carga){
-        error();
+        
+        Swal.fire({
+            title: 'Debe ingresar el autor del libro',
+            icon: 'error',
+            timer: 5000,}
+        );
     
         return false;
     }
     
     if(!input_genero){
-        alert("Debe ingresar genero");
+        Swal.fire({
+            title: 'Debe ingresar el genero del libro',
+            icon: 'error',
+            timer: 5000,}
+        );
     
         return false;
     }
         
-
     return true;
 }
 
@@ -76,16 +89,7 @@ function generar_libro() {
     let titulo_carga = document.getElementById("tiluloCarga").value;
     let autor_carga = document.getElementById("autorCarga").value;
     let genero = document.getElementById("generoCarga").value;
-//    let radios = document.getElementsByName("estados");
-
-//     let valorRadio = "  ";
-
-// for (let i  = 0; i < radios.length; i++) {
-//     if(radios[i].checked){
-//         valorRadio =  radios[i].value;
-//     }
     
-// }
 
     let libro = new Libro(titulo_carga, autor_carga, genero);
 
@@ -98,64 +102,37 @@ function generar_libro() {
 }
 
 
+function carga_tabla(titulo_carga, autor_carga, genero, ) {
 
-function carga_tabla(titulo_carga, autor_carga, genero) {
-
-
-    // Obtener la referencia del elemento body
-    let body = document.getElementsByClassName("tabla_biblioteca")[0];
-
-    // Crea un elemento <table> y un elemento <tbody>
-    // let tabla = document.createElement("table");
-    let tblBody = document.createElement("tbody");
-
-    // Crea las celdas
+    let tablaLibros = document.getElementById("table");
+    let cuerpoTabla = document.createElement("tbody");
+    
     for (let i = 0; i < 1; i++) {
-
-        // Crea las hileras de la tabla
-        let hilera = document.createElement("tr");
-
-            // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-            // texto sea el contenido de <td>, ubica el elemento <td> al final
-            // de la hilera de la tabla
-            let celda = document.createElement("td");
-            let celda2 = document.createElement("td");
-            let celda3 = document.createElement("td");
-            let celda4 = document.createElement("td");
-
-
-            let textoCelda = document.createTextNode(titulo_carga);
-            let textoCelda2 = document.createTextNode(autor_carga);
-            let textoCelda3 = document.createTextNode(genero);
-            let textoCelda4 = document.createTextNode("Debería ir el estado");
-
-            
-
-            celda.appendChild(textoCelda);
-            celda2.appendChild(textoCelda2);
-            celda3.appendChild(textoCelda3);
-            celda4.appendChild(textoCelda4);
-
-
-            hilera.appendChild(celda);
-            hilera.appendChild(celda2);
-            hilera.appendChild(celda3);
-            hilera.appendChild(celda4);
-
-
-        // agrega la hilera al final de la tabla (al final del elemento tblbody)
-        tblBody.appendChild(hilera);
         
-    }
+            let hilera = document.createElement("tr")
 
-    // posiciona el <tbody> debajo del elemento <table>
-    // tabla.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tblBody);
-    // modifica el atributo "border" de la tabla y lo fija a "2";
-    // tblBody.setAttribute("border", "red");
-    // tblBody.setAttribute("padding", "10px");
- }
+            let celda = document.createElement("td");
+            celda.innerText = titulo_carga;
+            hilera.appendChild(celda);
+            
+            let celda2 = document.createElement("td");
+            celda2. innerText= autor_carga
+            hilera.appendChild(celda2);
+
+            let celda3 = document.createElement("td");
+            celda3. innerText= genero;
+            hilera.appendChild(celda3);
+
+            cuerpoTabla.appendChild(hilera);
+
+    }
+    
+    tablaLibros.appendChild(cuerpoTabla);
+    
+                // body.appendChild(tblBody);
+                // body2.appendChild(tblBody2);
+                // body3.appendChild(tblBody3);
+}
 
 
 function carga_en_biblioteca() {
@@ -169,10 +146,7 @@ function carga_en_biblioteca() {
         for (let i = 0; i < arreglo.length; i++) {
 
             let libro = arreglo[i];
-            console.log(libro.titulo_carga);
-            console.log(libro.autor_carga);
- //           console.log(libro.valorRadio)
-           carga_tabla(libro.titulo_carga, libro.autor_carga, libro.genero);
+        carga_tabla(libro.titulo_carga, libro.autor_carga, libro.genero);
 
         }
 
@@ -180,5 +154,40 @@ function carga_en_biblioteca() {
 }
 
 
+// Prestamos
+// function obtener_nombre() {
+
+//     let recibir_nombre = document.getElementById("seleccion");
+
+//     let opcion = document.createElement("option");
+//     opcion.setAttribute("value", "value1");
+//     let opcionTexto = document.createTextNode("hola");
+//     opcion.appendChild(opcionTexto);
+        
+         
+//     recibir_nombre.appendChild(opcion);
+
+// }
+// window.onload = obtener_nombre;
+
+Libro.prototype.getNombre = function(){
+    return this.titulo_carga
+}
 
 
+
+let recibe_libro = document.getElementById("tiluloCarga");
+let mostrar_libro = document.getElementById("seleccion")
+
+function mostrar_libros(arreglo,lugar){
+    let elementos = '<option  selected disables>--Seleccione--</option>'
+    
+    for(let i=0; i < arreglo.length; i++){
+        elementos += '<option value="' + arreglo[i].value + '">' + arreglo[i] + '</option>'
+    }
+lugar.innerHTML = elementos
+}
+
+mostrar_libros(libros_en_biblioteca, mostrar_libro)
+
+console.log(mostrar_libro)

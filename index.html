@@ -25,20 +25,15 @@
 
     <h3>Prestamos</h3>
 
-<form action="" id="prestamo_de_libros" class="seleccion">
-    <div>
-        <label for="nombre_libro">Nombre del libro prestado:</label>
-        <input type="text" value="" required id="nombreTexto">
-    </div>
+<form action="" id="prestamo_de_libros" >
+    <select class="form-select" aria-label="Default select example" id="seleccion">
+ 
+    </select>
 
-    <div>
-        <label for="autor">Autor del libro:</label>
-        <input type="text" value="" required id="autorTexto">
-    </div>
 
     <div>
         <label for="destinatario">Indicar a quien se presto el libro:</label>
-        <input type="text" value="" required id="destinatario">
+        <input type="text" value="" placeholder="Destinatario"  id="destinatario">
     </div>
 
     <!-- <div>
@@ -74,53 +69,37 @@
         <input type="text" value="" id="generoCarga">
     </div>
     
-
- <!-- <div id="estado1">
-        <label for="estado">Estado del libro</label>
-    <div id="opciones_estado">
-        <div>Libre
-            <input type="radio" name="estados" value="libre" id="libre" />
-        </div>
-        <div>Prestado
-            <input type="radio" name="estados" value="prestado" id="prestado"/>
-        </div>
-    </div>
-    </div> -->
     <button type="submit" id="btnCargar">Agregar libro</button>
 
 </form>
+
+
 </section>
+
 </div>
+
+
+<!-- tabla de libros cargados -->
 
 <section id="biblioteca" class="biblioteca"> 
 <h3 >Listado de libros en la biblioteca</h3>
-
-<ul id="titulo_encabezado" class="col-12">
-    <li>Nombre</li>
-    <li>Autor</li>
-    <li>Genero</li>
-    <li>Estado</li>
-</ul>    
-
-
-
-    <div id="libros_biblioteca" class="libros_biblioteca col-12" >
-
-     <table id="tabla_biblioteca" class="tabla_biblioteca col-12">
-
-
-       
-     </table>
-
-    </div>
-
 </section>
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<table id="table" class=" table table-striped tabla_biblioteca">
+        <tr>
+            <th id="titulo" class="encabezado borde">Título</th>
+            <th id="autor" class="encabezado borde">Autor</th>
+            <th id="genero" class="encabezado borde">Genero</th>
+        </tr>
 
+</table>
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+        <script src="sweet.js"></script>
+       <!-- <script src="prestamo.js"></script> -->
         <script src="main.js"></script>
-        <!-- <script src="libro.js"></script> -->
-        <!-- <script src="prestamo.js"></script> -->
-        <!-- <script src="carga.js"></script> -->
+        <!-- <script src="nuevo.js"></script> -->
+
 </body>
 </html>
