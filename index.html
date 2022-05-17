@@ -32,7 +32,7 @@
 
 
     <div>
-        <label for="destinatario">Indicar a quien se presto el libro:</label>
+        <label for="persona">Indicar a quien se presto el libro:</label>
         <input type="text" value="" placeholder="Destinatario"  id="destinatario">
     </div>
 
@@ -94,12 +94,33 @@
 
 </table>
 
+
+<!-- Tabla libros prestados  -->
+
+
+<section id="prestamo" class="prestamo"> 
+    <h3 >Listado de Prestamos</h3>
+    </section>
+    
+    <table id="tabla_prestamo" class=" table table-striped tabla_biblioteca">
+            <tr>
+                <th id="libro_prestado" class="encabezado borde">Título</th>
+                <th id="persona" class="encabezado borde">Destinatario</th>
+            </tr>
+    
+    </table>
+
+
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
+        
         <script src="sweet.js"></script>
+        
+        <!-- <script src="otro.js"></script> -->
        <!-- <script src="prestamo.js"></script> -->
         <script src="main.js"></script>
         <!-- <script src="nuevo.js"></script> -->
+        
 
 </body>
 </html>

@@ -5,27 +5,26 @@ class Libro{
         this.titulo_carga = titulo_carga;
         this.autor_carga = autor_carga;
         this.genero = genero;
+        }
     }
-    }
+
 
 
 let libros_en_biblioteca = new Array();
 const clave_local_storage = "carga_de_libros";
 
-carga_en_biblioteca();
+// carga_en_biblioteca();
 
 
 let botonCarga = document.getElementById("btnCargar");
 
-botonCarga.addEventListener("click", (el)=>{
-el.preventDefault()
+botonCarga.addEventListener("click", (el)=>{ // le agregue el preventDefault porque se estaba recargando la pagina
+ el.preventDefault()
     if(validar_datos()){
 
         generar_libro();
-        mostrar_libros(libros_en_biblioteca,mostrar_libro);
-   
-
-
+        mostrar_libros(libros_en_biblioteca, mostrar_libro) 
+        
 
     }
     else{
@@ -99,9 +98,9 @@ function generar_libro() {
 
     localStorage.setItem(clave_local_storage, JSON.stringify(libros_en_biblioteca));
 
+    // carga_en_biblioteca(titulo_carga, autor_carga);
 
 }
-
 
 
 function carga_tabla(titulo_carga, autor_carga, genero, ) {
@@ -114,6 +113,7 @@ function carga_tabla(titulo_carga, autor_carga, genero, ) {
             let hilera = document.createElement("tr")
 
             let celda = document.createElement("td");
+            console.log(titulo_carga);
             celda.innerText = titulo_carga;
             hilera.appendChild(celda);
             
@@ -130,11 +130,12 @@ function carga_tabla(titulo_carga, autor_carga, genero, ) {
     }
     
     tablaLibros.appendChild(cuerpoTabla);
+    
 
 }
 
 
-function carga_en_biblioteca() {
+function carga_en_biblioteca() {         // esta funcion hacia que se repitan la info de la tabla, me parecio conveniente sacarla
 
     let arreglo = localStorage.getItem(clave_local_storage);
     if (arreglo) {
@@ -143,6 +144,7 @@ function carga_en_biblioteca() {
 
         libros_en_biblioteca = arreglo;
 
+        
         for (let i = 0; i < arreglo.length; i++) {
 
             let libro = arreglo[i];
@@ -151,7 +153,7 @@ function carga_en_biblioteca() {
         }
 
     }
- }
+}
 
 
 // Prestamos
@@ -162,98 +164,17 @@ Libro.prototype.getNombre = function(){
 }
 
 
+
 let recibe_libro = document.getElementById("tiluloCarga");
 let mostrar_libro = document.getElementById("seleccion")
 
 function mostrar_libros(arreglo,lugar){
-
-
     let elementos = '<option  selected disables>--Seleccione--</option>'
     
     for(let i=0; i < arreglo.length; i++){
-        elementos += '<option value="' + arreglo[i].titulo_carga + '">' + arreglo[i].titulo_carga + '</option>'
+        elementos += '<option value="' + arreglo[i].titulo_carga + '">' + arreglo[i].titulo_carga + '</option>' // Aca solo tenias mal el nombre de la propiedad y donde estabas llamando la funcion
     }
 lugar.innerHTML = elementos
-
-
 }
 
 console.log(libros_en_biblioteca)
-
-mostrar_libros(libros_en_biblioteca, mostrar_libro)
-
-
-class Prestamo{
-    constructor(libro_prestado, persona){
-        this.libro_prestado = libro_prestado;
-        this.persona = persona;
-    }
-
-}
-
-let libros_prestamos = new Array()
-const clave_local_storage_prestamo = "Libro prestado";
-
-let btn = document.getElementById("btn");
-
-btn.addEventListener("click", (e)=>{
-    e.preventDefault();
-
-    if(validar_prestamo()){
-
-        add_prestamo();
-}
-
-else{
-    Swal.fire({
-        title: 'Debe ingresar todos los datos',
-        icon: 'error',
-        timer: 5000,}
-    );
-}
-})
-
-
-function validar_prestamo(){
-
-    let input_libro_prestado = document.getElementById("seleccion").value;
-    let input_persona = document.getElementById("destinatario").value;
-
-    if(!input_libro_prestado){
-        Swal.fire({
-            title: 'Debe ingresar el titulo a prestar',
-            icon: 'error',
-            timer: 5000,}
-        )
-
-        return false;
-    }
-    if(!input_persona){
-        Swal.fire({
-            title: 'Debe ingresar el destinatorio',
-            icon: 'error',
-            timer: 5000,}
-        )
-
-        return false;
-
-    }
-
-    return true;
-
-}
-
-function add_prestamo(){
-
-    let libro_prestado = document.getElementById("seleccion");
-    let persona = document.getElementById("destinatario");
-
-let prestamo = new Prestamo(libro_prestado, persona)
-
-libros_prestamos.push(prestamo);
-
-localStorage.setItem(clave_local_storage_prestamo,JSON.stringify(libros_prestamos))
-
-}
-
-console.log(add_prestamo)
