@@ -157,6 +157,7 @@ function carga_en_biblioteca() {
 // Prestamos
 
 
+
 Libro.prototype.getNombre = function(){
     return this.titulo_carga
 }
@@ -188,20 +189,22 @@ class Prestamo{
         this.libro_prestado = libro_prestado;
         this.persona = persona;
     }
-
 }
 
 let libros_prestamos = new Array()
+
 const clave_local_storage_prestamo = "Libro prestado";
 
-let btn = document.getElementById("btn");
 
-btn.addEventListener("click", (e)=>{
-    e.preventDefault();
+let btn = document.getElementById("btnPrestamo");
+
+btn.addEventListener("click", (el)=>{
+    el.preventDefault();
 
     if(validar_prestamo()){
 
         add_prestamo();
+      
 }
 
 else{
@@ -234,13 +237,9 @@ function validar_prestamo(){
             icon: 'error',
             timer: 5000,}
         )
-
         return false;
-
     }
-
     return true;
-
 }
 
 function add_prestamo(){
@@ -248,12 +247,70 @@ function add_prestamo(){
     let libro_prestado = document.getElementById("seleccion");
     let persona = document.getElementById("destinatario");
 
-let prestamo = new Prestamo(libro_prestado, persona)
+console.log(libro_prestado.value)
+console.log(persona.value)
+
+let prestamo = new Prestamo(libro_prestado.value, persona.value)
+
+carga_tabla_prestamo(libro_prestado.value, persona.value)
 
 libros_prestamos.push(prestamo);
 
-localStorage.setItem(clave_local_storage_prestamo,JSON.stringify(libros_prestamos))
+console.log(libros_prestamos)
+
+localStorage.setItem(clave_local_storage_prestamo,JSON.stringify(libros_prestamos));
 
 }
 
-console.log(add_prestamo)
+
+
+function carga_tabla_prestamo(titulos, personas) {
+
+
+    let tabla_prestamo = document.getElementById("tabla_prestamo");
+    let cuerpoTabla = document.createElement("tbody");
+
+    cuerpoTabla.innerHTML = ""
+
+console.log(cuerpoTabla)
+
+    for (let i = 0; i < 1; i++) {
+        
+            let hilera = document.createElement("tr")
+
+            let celda = document.createElement("td");
+            celda.innerText = titulos;
+            hilera.appendChild(celda);
+            
+
+
+            let celda2 = document.createElement("td");
+            celda2. innerText= personas;
+            hilera.appendChild(celda2);
+
+            cuerpoTabla.appendChild(hilera);
+    }
+    
+    tabla_prestamo.appendChild(cuerpoTabla);
+
+    console.log(libros_prestamos)
+}
+
+function carga_prestamo() {
+
+    let arreglo1 = localStorage.getItem(clave_local_storage_prestamo);
+    if (arreglo1) {
+
+        arreglo1 = JSON.parse(arreglo1);
+
+        libros_en_biblioteca = arreglo1;
+
+        for (let i = 0; i < arreglo1.length; i++) {
+
+            let prestamo = arreglo1[i];
+        carga_tabla(prestamo.libro_prestado, prestamo.persona);
+
+        }
+
+    }
+ }
