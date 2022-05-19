@@ -17,15 +17,12 @@ carga_en_biblioteca();
 
 let botonCarga = document.getElementById("btnCargar");
 
-botonCarga.addEventListener("click", (el)=>{
-el.preventDefault()
+botonCarga.addEventListener("click", (e)=>{
+e.preventDefault()
     if(validar_datos()){
 
         generar_libro();
         mostrar_libros(libros_en_biblioteca,mostrar_libro);
-   
-
-
 
     }
     else{
@@ -45,36 +42,16 @@ function validar_datos (){
     
     if(!input_titulo_carga){
 
-       
-        Swal.fire({
-            title: 'Debe ingresar el titulo del libro',
-            icon: 'error',
-            timer: 5000,}
-        )
-        
-   
-    
         return false;
     }
 
     
     if(!input_autor_carga){
         
-        Swal.fire({
-            title: 'Debe ingresar el autor del libro',
-            icon: 'error',
-            timer: 5000,}
-        );
-    
         return false;
     }
     
     if(!input_genero){
-        Swal.fire({
-            title: 'Debe ingresar el genero del libro',
-            icon: 'error',
-            timer: 5000,}
-        );
     
         return false;
     }
@@ -85,24 +62,19 @@ function validar_datos (){
 
 function generar_libro() {
 
-
     let titulo_carga = document.getElementById("tiluloCarga").value;
     let autor_carga = document.getElementById("autorCarga").value;
     let genero = document.getElementById("generoCarga").value;
     
-
     let libro = new Libro(titulo_carga, autor_carga, genero);
-    carga_tabla(titulo_carga, autor_carga, genero); // Y aca ejecutamos el cargar tabla
-
+    
+    carga_tabla(titulo_carga, autor_carga, genero);
 
     libros_en_biblioteca.push(libro);
 
     localStorage.setItem(clave_local_storage, JSON.stringify(libros_en_biblioteca));
 
-
 }
-
-
 
 function carga_tabla(titulo_carga, autor_carga, genero, ) {
 
@@ -157,10 +129,10 @@ function carga_en_biblioteca() {
 // Prestamos
 
 
-
 Libro.prototype.getNombre = function(){
     return this.titulo_carga
 }
+
 
 
 let recibe_libro = document.getElementById("tiluloCarga");
@@ -175,6 +147,7 @@ function mostrar_libros(arreglo,lugar){
         elementos += '<option value="' + arreglo[i].titulo_carga + '">' + arreglo[i].titulo_carga + '</option>'
     }
 lugar.innerHTML = elementos
+
 
 
 }
@@ -192,9 +165,8 @@ class Prestamo{
 }
 
 let libros_prestamos = new Array()
-
 const clave_local_storage_prestamo = "Libro prestado";
-
+carga_prestamo()
 
 let btn = document.getElementById("btnPrestamo");
 
@@ -204,7 +176,6 @@ btn.addEventListener("click", (el)=>{
     if(validar_prestamo()){
 
         add_prestamo();
-      
 }
 
 else{
@@ -222,21 +193,12 @@ function validar_prestamo(){
     let input_libro_prestado = document.getElementById("seleccion").value;
     let input_persona = document.getElementById("destinatario").value;
 
-    if(!input_libro_prestado){
-        Swal.fire({
-            title: 'Debe ingresar el titulo a prestar',
-            icon: 'error',
-            timer: 5000,}
-        )
+    if((!input_libro_prestado)){
 
         return false;
     }
     if(!input_persona){
-        Swal.fire({
-            title: 'Debe ingresar el destinatorio',
-            icon: 'error',
-            timer: 5000,}
-        )
+
         return false;
     }
     return true;
@@ -247,16 +209,12 @@ function add_prestamo(){
     let libro_prestado = document.getElementById("seleccion");
     let persona = document.getElementById("destinatario");
 
-console.log(libro_prestado.value)
-console.log(persona.value)
 
 let prestamo = new Prestamo(libro_prestado.value, persona.value)
 
 carga_tabla_prestamo(libro_prestado.value, persona.value)
 
 libros_prestamos.push(prestamo);
-
-console.log(libros_prestamos)
 
 localStorage.setItem(clave_local_storage_prestamo,JSON.stringify(libros_prestamos));
 
@@ -270,10 +228,6 @@ function carga_tabla_prestamo(titulos, personas) {
     let tabla_prestamo = document.getElementById("tabla_prestamo");
     let cuerpoTabla = document.createElement("tbody");
 
-    cuerpoTabla.innerHTML = ""
-
-console.log(cuerpoTabla)
-
     for (let i = 0; i < 1; i++) {
         
             let hilera = document.createElement("tr")
@@ -282,8 +236,6 @@ console.log(cuerpoTabla)
             celda.innerText = titulos;
             hilera.appendChild(celda);
             
-
-
             let celda2 = document.createElement("td");
             celda2. innerText= personas;
             hilera.appendChild(celda2);
@@ -298,17 +250,18 @@ console.log(cuerpoTabla)
 
 function carga_prestamo() {
 
-    let arreglo1 = localStorage.getItem(clave_local_storage_prestamo);
-    if (arreglo1) {
+    let arrego = localStorage.getItem(clave_local_storage_prestamo);
+    if (arrego) {
 
-        arreglo1 = JSON.parse(arreglo1);
+        arrego = JSON.parse(arrego);
 
-        libros_en_biblioteca = arreglo1;
+        libros_prestamos = arrego;
 
-        for (let i = 0; i < arreglo1.length; i++) {
+        for (let i = 0; i < arrego.length; i++) {
 
-            let prestamo = arreglo1[i];
-        carga_tabla(prestamo.libro_prestado, prestamo.persona);
+            let entrega = arrego[i];
+
+            carga_tabla_prestamo(entrega.libro_prestado, entrega.persona);
 
         }
 
