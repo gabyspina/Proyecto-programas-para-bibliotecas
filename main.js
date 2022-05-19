@@ -193,7 +193,7 @@ function validar_prestamo(){
     let input_libro_prestado = document.getElementById("seleccion").value;
     let input_persona = document.getElementById("destinatario").value;
 
-    if((!input_libro_prestado)){
+    if((!input_libro_prestado) || (input_libro_prestado == "--Seleccione--")){
 
         return false;
     }
